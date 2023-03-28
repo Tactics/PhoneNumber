@@ -1,0 +1,24 @@
+#file: noinspection SpellCheckingInspection
+name: Quality Assurance
+on:
+    push: ~
+    pull_request: ~
+
+jobs:
+    quality_assurance:
+        name: Quality Assurance on ${{ matrix.php }}
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                php: [ '8.1', '8.2' ]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  coverage: xdebug
+                  tools: composer:v2
+            - run: composer update --no-progress
+            - run: vendor/bin/ecs check --config ecs.php
+            - run: vendor/bin/phpunit --coverage-text
+            - run: vendor/bin/phpstan --memory-limit=-1 --debug --xdebug

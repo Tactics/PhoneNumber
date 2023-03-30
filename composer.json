@@ -1,6 +1,5 @@
 {
-    "name": "tactics/foo",
-    "description": "foo",
+    "name": "tactics/phonenumber",
     "license": "GPL-3.0-or-later",
     "authors": [
         {
@@ -8,8 +7,16 @@
             "email": "info@tactics.be"
         }
     ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://satis.tactics.be"
+        }
+    ],
     "require": {
-        "php": "~8.1"
+        "php": "~8.1",
+        "giggsey/libphonenumber-for-php": "^8.13",
+        "tactics/iso3166": "1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
@@ -21,13 +28,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Tactics\\Foo\\": "src"
+            "Tactics\\PhoneNumber\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tactics\\Foo\\": "tests",
-            "Tactics\\Foo\\Benchmarks\\": "benchmarks"
+            "Tactics\\PhoneNumber\\": "tests",
+            "Tactics\\PhoneNumber\\Benchmarks\\": "benchmarks"
         }
     },
     "scripts": {
